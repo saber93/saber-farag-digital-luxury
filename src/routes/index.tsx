@@ -37,61 +37,69 @@ function HomePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative isolate overflow-hidden pb-24 pt-36 sm:pt-44 lg:min-h-[100svh] lg:pt-44">
+      <section className="relative isolate overflow-hidden pb-24 pt-36 sm:pt-44 lg:min-h-[100svh] lg:pt-44 flex flex-col justify-center">
         <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
         <div className="pointer-events-none absolute inset-x-0 top-20 -z-10 mx-auto h-[600px] max-w-6xl opacity-70 noise" />
-        {/* grid lines */}
-        <div className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,oklch(1_0_0_/_0.04)_1px,transparent_1px),linear-gradient(to_bottom,oklch(1_0_0_/_0.04)_1px,transparent_1px)] bg-[size:80px_80px]" />
+        
+        {/* grid lines - more subtle */}
+        <div className="pointer-events-none absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_80%)]">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,oklch(1_0_0_/_0.03)_1px,transparent_1px),linear-gradient(to_bottom,oklch(1_0_0_/_0.03)_1px,transparent_1px)] bg-[size:100px_100px]" />
         </div>
 
         <FloatingDashboards />
 
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-7xl px-6 relative">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
             <SectionLabel className="justify-start">
-              <span className="inline-flex items-center gap-1.5">
-                <Sparkles className="h-3 w-3 text-primary-glow" /> Available for select projects · 2026
+              <span className="inline-flex items-center gap-1.5 font-bold tracking-widest text-[10px]">
+                <Sparkles className="h-3 w-3 text-primary-glow animate-pulse" /> 2026 PRODUCT SYSTEMS & LUXURY UX
               </span>
             </SectionLabel>
           </motion.div>
 
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-6 max-w-5xl font-display text-[clamp(2.6rem,7vw,5.5rem)] leading-[1.02] tracking-tight"
+            transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 max-w-5xl font-display text-[clamp(2.8rem,8vw,6.5rem)] leading-[0.95] tracking-tighter"
           >
-            Designing <span className="italic text-gradient-primary">Luxury</span> Digital
-            <br className="hidden sm:block" /> Experiences & <span className="italic text-gradient-primary">Data-Driven</span> Platforms
+            Crafting <span className="italic text-gradient-primary">Luxury</span> Product
+            <br className="hidden sm:block" /> Systems & <span className="italic text-gradient-primary">Intelligent</span> Dashboards
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-7 max-w-2xl text-base text-muted-foreground sm:text-lg"
+            transition={{ duration: 1, delay: 0.3 }}
+            className="mt-10 max-w-2xl text-lg text-muted-foreground sm:text-xl font-light leading-relaxed"
           >
-            UI/UX Designer with 5+ years building yacht-industry websites, analytics systems,
-            SEO-driven platforms, dashboards, and growth-focused digital products.
+            Expert UI/UX & Product Design for high-stakes industries. Specializing in 
+            <span className="text-foreground"> luxury yacht ecosystems</span>, 
+            <span className="text-foreground"> enterprise analytics</span>, and 
+            <span className="text-foreground"> conversion-driven growth systems</span>.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.4 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
+            transition={{ duration: 1, delay: 0.5 }}
+            className="mt-12 flex flex-wrap items-center gap-4"
           >
-            <Button asChild variant="luxury" size="xl">
-              <Link to="/work">View Projects <ArrowUpRight className="h-4 w-4" /></Link>
-            </Button>
-            <Button asChild variant="ghost-glow" size="xl">
-              <Link to="/contact">Contact Me <ArrowRight className="h-4 w-4" /></Link>
-            </Button>
+            <MagneticButton className="px-10 py-5 rounded-full bg-primary text-primary-foreground font-bold text-lg shadow-glow">
+              <Link to="/work/luxury-yacht-platform" className="flex items-center gap-3">
+                View Masterpiece <ArrowUpRight className="h-5 w-5" />
+              </Link>
+            </MagneticButton>
+            <Link 
+              to="/work" 
+              className="px-8 py-5 rounded-full bg-surface/50 border border-white/5 hover:border-white/20 transition-all font-medium flex items-center gap-2 group"
+            >
+              All Systems <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </motion.div>
 
           {/* hero stat strip */}
@@ -179,47 +187,55 @@ function HomePage() {
           </Link>
         </div>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-2">
+        <div className="mt-14 grid gap-8 md:grid-cols-2">
           {projects.map((p, i) => (
-            <Reveal key={p.slug} delay={i * 0.05}>
+            <Reveal key={p.slug} delay={i * 0.1}>
               <Link to="/work/$slug" params={{ slug: p.slug }} className="group block">
-                <GlassCard className="relative h-full p-7 transition-all duration-500 hover:border-white/20 hover:shadow-[var(--shadow-glow)]">
+                <GlassCard className="relative h-full p-8 transition-all duration-500 hover:border-primary/30 hover:shadow-glow">
                   <div className="flex items-center justify-between">
-                    <span className="font-display text-2xl text-silver">{p.index}</span>
-                    {p.status === "in-development" ? (
-                      <span className="rounded-full border border-primary-glow/30 bg-primary-glow/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-primary-glow">
-                        In Development
-                      </span>
-                    ) : (
-                      <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                        {p.year}
-                      </span>
-                    )}
+                    <span className="font-display text-3xl opacity-20">{p.index}</span>
+                    <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-muted-foreground bg-white/5">
+                      {p.year}
+                    </span>
                   </div>
-                  <div className="mt-5 micro-label">{p.category}</div>
-                  <h3 className="mt-3 font-display text-3xl leading-tight">{p.title}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{p.tagline}</p>
-
-                  {/* mock dashboard preview */}
-                  <div className="relative mt-7 overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-white/[0.04] to-transparent p-4">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="micro-label">{p.metrics[0].label}</div>
-                        <div className="mt-1 font-display text-2xl text-gradient">{p.metrics[0].value}</div>
-                      </div>
-                      <div>
-                        <div className="micro-label">{p.metrics[1].label}</div>
-                        <div className="mt-1 font-display text-2xl text-gradient">{p.metrics[1].value}</div>
-                      </div>
-                    </div>
-                    <div className="-mx-1 mt-2">
-                      <MiniArea height={64} />
-                    </div>
+                  
+                  <div className="mt-8">
+                    <div className="micro-label text-primary">{p.category}</div>
+                    <h3 className="mt-3 font-display text-4xl leading-tight group-hover:text-gradient transition-all duration-500">{p.title}</h3>
+                    <p className="mt-4 text-muted-foreground line-clamp-2">{p.tagline}</p>
                   </div>
 
-                  <div className="mt-6 inline-flex items-center gap-1.5 text-sm text-foreground">
-                    View case study
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  {/* High-fidelity mini dashboard preview */}
+                  <div className="relative mt-10 overflow-hidden rounded-2xl border border-white/10 bg-black/20 p-6">
+                    <div className="grid grid-cols-2 gap-8 relative z-10">
+                      {p.metrics.slice(0, 2).map((m, mi) => (
+                        <div key={mi}>
+                          <div className="micro-label opacity-60">{m.label}</div>
+                          <div className="mt-2 font-display text-3xl tracking-tight text-white">
+                            <AnimatedCounter 
+                              value={parseFloat(m.value.replace(/[^0-9.]/g, ''))} 
+                              suffix={m.value.replace(/[0-9.]/g, '')}
+                              decimals={m.value.includes('.') ? 1 : 0}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="absolute inset-0 -bottom-8 opacity-20 group-hover:opacity-40 transition-opacity duration-700">
+                      <MiniArea height={120} />
+                    </div>
+                  </div>
+
+                  <div className="mt-10 flex items-center justify-between">
+                    <div className="flex -space-x-2">
+                       {[1,2,3].map(avatar => (
+                         <div key={avatar} className="h-8 w-8 rounded-full border-2 border-surface bg-white/10" />
+                       ))}
+                    </div>
+                    <div className="inline-flex items-center gap-2 text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                      View System Architecture
+                      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
                   </div>
                 </GlassCard>
               </Link>

@@ -5,12 +5,14 @@ export function AnimatedCounter({
   value,
   suffix = "",
   prefix = "",
-  duration = 1800,
+  duration = 2000,
+  decimals = 0,
 }: {
   value: number;
   suffix?: string;
   prefix?: string;
   duration?: number;
+  decimals?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
@@ -22,8 +24,8 @@ export function AnimatedCounter({
     let raf = 0;
     const tick = (t: number) => {
       const p = Math.min(1, (t - start) / duration);
-      const eased = 1 - Math.pow(1 - p, 3);
-      setN(Math.round(value * eased));
+      const eased = 1 - Math.pow(1 - p, 4); // Quartic ease out
+      setN(value * eased);
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
@@ -33,7 +35,7 @@ export function AnimatedCounter({
   return (
     <span ref={ref}>
       {prefix}
-      {n.toLocaleString()}
+      {n.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })}
       {suffix}
     </span>
   );

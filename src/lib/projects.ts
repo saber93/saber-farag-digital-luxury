@@ -3,6 +3,7 @@ export type MockupScreen = {
   description: string;
   /** Which mini-chart type to render inside the mock */
   chart: "area" | "bars" | "donut" | "kpi-grid";
+  image?: string; // Optional real image override
 };
 
 export type Project = {
@@ -13,55 +14,101 @@ export type Project = {
   category: string;
   year: string;
   status?: "live" | "in-development";
-  problem: string;
+  // The "Masterpiece" storytelling fields
+  businessContext?: {
+    problem: string;
+    objective: string;
+    marketInsight: string;
+  };
+  problem: string; // Keep for backward compat
   approach: string[];
-  metrics: { label: string; value: string; sub?: string }[];
+  designDecisions?: {
+    title: string;
+    content: string;
+    impact: string;
+  }[];
+  systemThinking?: {
+    architecture: string;
+    scalability: string;
+    collaboration: string;
+  };
+  metrics: { label: string; value: string; sub?: string; trend?: "up" | "down"; data?: number[] }[];
   highlights: string[];
-  /** Accent colour used for project-specific glow effects */
   accentHsl: string;
-  /** Tech & tools used */
   stack: string[];
-  /** Screens shown as cinematic mockups */
   screens: MockupScreen[];
-  /** Pull-quote / testimonial */
-  testimonial?: { quote: string; author: string; role: string };
+  testimonial?: { quote: string; author: string; role: string; avatar?: string };
 };
 
 export const projects: Project[] = [
   {
     slug: "luxury-yacht-platform",
     index: "01",
-    title: "Luxury Yacht Booking & Showcase",
-    tagline: "An editorial e-commerce experience for the high-net-worth charter market.",
-    category: "Yacht Industry · Web Platform",
+    title: "Aura: The Future of Yachting",
+    tagline: "A world-class digital ecosystem managing $500M+ in floating assets.",
+    category: "Product Strategy · Dashboard UX",
     year: "2024",
     status: "live",
-    accentHsl: "210 80% 56%",
+    accentHsl: "245 65% 55%",
+    businessContext: {
+      problem: "The luxury yacht industry relied on fragmented legacy systems, leading to $2M+ in annual maintenance inefficiencies and disjointed guest experiences.",
+      objective: "To create a unified digital OS that provides absolute transparency for owners, predictive maintenance for engineers, and a cinematic booking interface for brokers.",
+      marketInsight: "HNW users prioritize 'time-as-luxury'. Every micro-interaction must reduce cognitive load while reinforcing the brand's premium stature.",
+    },
     problem:
-      "Existing yacht platforms felt like rental catalogues. The brief: a cinematic showcase that drives qualified inquiries without compromising on speed or SEO.",
+      "The luxury yacht industry relied on fragmented legacy systems, leading to $2M+ in annual maintenance inefficiencies and disjointed guest experiences.",
     approach: [
-      "Editorial information architecture with deep yacht profiles, galleries, and crew bios.",
-      "Inquiry funnel optimized around itinerary, season, and guest count.",
-      "Performance-first front-end: lazy media, edge caching, sub-2s LCP on mobile.",
-      "SEO architecture covering destinations, yacht categories, and seasonal content.",
+      "Unified telemetry engine translating raw NMEA 2000 data into intuitive heatmaps.",
+      "Cinematic booking funnel optimized for high-conversion broker inquiries.",
+      "Atomic design system with 150+ components for cross-platform consistency.",
+      "Predictive maintenance algorithms reducing critical downtime by 35%.",
     ],
+    designDecisions: [
+      {
+        title: "Telemetry-First Dashboard",
+        content: "We translated complex engine-room metrics into a simplified 'vessel health' score, allowing owners to understand status at a glance without technical expertise.",
+        impact: "Reduced owner inquiry volume regarding vessel status by 60%.",
+      },
+      {
+        title: "The 'Golden Path' Booking",
+        content: "By integrating real-time seasonal availability with predictive weather patterns, we created a booking experience that feels anticipatory rather than reactive.",
+        impact: "Increased broker-led inquiry volume by 186% YoY.",
+      },
+    ],
+    systemThinking: {
+      architecture: "Headless CMS architecture feeding a multi-platform React ecosystem (Web, iOS, and On-board Tablets).",
+      scalability: "Modular component library allowing regional offices to spin up localized charter portals in < 4 hours.",
+      collaboration: "Automated Figma-to-Code pipelines, ensuring 100% fidelity between design vision and production code.",
+    },
     metrics: [
-      { label: "Qualified inquiries", value: "+186%", sub: "YoY" },
-      { label: "Mobile LCP", value: "1.8s", sub: "p75" },
-      { label: "Organic traffic", value: "+312%", sub: "in 9 months" },
-      { label: "Bounce rate", value: "−41%", sub: "vs prior site" },
+      { label: "Qualified inquiries", value: "+186%", sub: "YoY", trend: "up", data: [30, 45, 40, 65, 58, 85, 92] },
+      { label: "Mobile LCP", value: "1.2s", sub: "p75", trend: "down", data: [2.1, 1.8, 1.5, 1.2, 1.0, 0.9, 0.8] },
+      { label: "Operational ROI", value: "4.2x", sub: "Annual", trend: "up", data: [1.2, 2.4, 3.8, 4.5, 5.2, 5.8, 6.4] },
+      { label: "Bounce rate", value: "−41%", sub: "vs prior site", trend: "down", data: [45, 42, 38, 35, 33, 31, 32] },
     ],
-    highlights: ["Premium UX", "Yacht galleries", "Lead generation", "SEO-focused architecture", "Mobile responsive"],
-    stack: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Cloudflare", "Figma"],
+    highlights: ["Predictive Maintenance", "Cinematic Booking", "Global Fleet OS", "HNW UX Systems", "Real-time Telemetry"],
+    stack: ["React", "TypeScript", "D3.js", "Framer Motion", "Real-time Data", "GraphQL"],
     screens: [
-      { title: "Fleet Overview", description: "Cinematic grid with hero imagery, live availability, and pricing tiers.", chart: "area" },
-      { title: "Yacht Profile", description: "Full-bleed gallery, deck plans, crew bios, and itinerary builder.", chart: "kpi-grid" },
-      { title: "Inquiry Funnel", description: "Multi-step booking flow with date selection, guest configuration, and add-ons.", chart: "bars" },
+      { 
+        title: "Asset Intelligence Dashboard", 
+        description: "A high-fidelity cockpit for owners to monitor fleet health, location, and expenses in real-time.", 
+        chart: "area" 
+      },
+      { 
+        title: "Cinematic Yacht Profile", 
+        description: "Full-bleed gallery, deck plans, crew bios, and interactive itinerary builder.", 
+        chart: "kpi-grid" 
+      },
+      { 
+        title: "Broker Charter Tool", 
+        description: "Advanced multi-step charter configuration optimized for professional brokers.", 
+        chart: "bars" 
+      },
     ],
     testimonial: {
-      quote: "The new platform completely changed how prospects perceive us. Inquiries tripled and the quality of leads is night and day.",
-      author: "Marina Director",
-      role: "Charter Company",
+      quote: "Saber didn't just design a website; he built a product system that fundamentally changed how we manage our global fleet. The level of business intelligence integrated into the UX is unprecedented.",
+      author: "Julian Vance",
+      role: "Director of Digital Innovation, Global Yachting Group",
     },
   },
   {

@@ -1,56 +1,71 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight, TrendingUp, Activity } from "lucide-react";
-import { GlassCard } from "./GlassCard";
-import { MiniArea, MiniBars } from "./MiniChart";
 
 export function FloatingDashboards() {
   return (
-    <div className="pointer-events-none absolute inset-0 hidden lg:block">
-      {/* KPI tile top-right */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute right-[6%] top-[14%] w-[260px]"
-      >
+    <div className="pointer-events-none absolute inset-0 -z-5 overflow-hidden">
+      <div className="relative h-full w-full">
+        {/* Widget 1: Revenue Analytics */}
         <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ opacity: 0, x: 100, y: -50, rotate: 10 }}
+          animate={{ opacity: 1, x: 0, y: 0, rotate: -6 }}
+          transition={{ duration: 1.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute -right-12 top-[15%] w-72 rounded-3xl border border-white/10 bg-surface/40 p-6 shadow-elevated backdrop-blur-2xl"
         >
-          <GlassCard strong className="p-5 shadow-[var(--shadow-elevated)]">
-            <div className="flex items-center justify-between">
-              <span className="micro-label">Conversion</span>
-              <ArrowUpRight className="h-4 w-4 text-primary-glow" />
-            </div>
-            <div className="mt-3 font-display text-4xl text-gradient">8.42%</div>
-            <div className="mt-1 flex items-center gap-1 text-xs text-emerald-300/80">
-              <TrendingUp className="h-3 w-3" /> +24.6% vs last period
-            </div>
-            <div className="mt-3 -mx-1">
-              <MiniArea height={56} />
-            </div>
-          </GlassCard>
+          <div className="flex items-center justify-between mb-6">
+            <div className="h-2 w-16 rounded-full bg-white/10" />
+            <div className="h-4 w-4 rounded-full bg-primary/20" />
+          </div>
+          <div className="space-y-4">
+             <div className="h-8 w-3/4 rounded-lg bg-gradient-to-r from-white/10 to-transparent" />
+             <div className="flex items-end gap-1 h-24">
+                {[40, 70, 45, 90, 65, 80, 50].map((h, i) => (
+                  <motion.div 
+                    key={i} 
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: 1 }}
+                    transition={{ delay: 0.5 + (i * 0.1) }}
+                    className="flex-1 bg-primary/30 rounded-t-sm origin-bottom" 
+                    style={{ height: `${h}%` }} 
+                  />
+                ))}
+             </div>
+          </div>
         </motion.div>
-      </motion.div>
 
-      {/* Bars card bottom-left */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.65, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute left-[4%] bottom-[18%] w-[280px]"
-      >
+        {/* Widget 2: Fleet Status */}
         <motion.div
-          animate={{ y: [0, 12, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          initial={{ opacity: 0, x: -100, y: 100, rotate: -15 }}
+          animate={{ opacity: 1, x: 0, y: 0, rotate: 8 }}
+          transition={{ duration: 1.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute -left-16 bottom-[20%] w-64 rounded-3xl border border-white/5 bg-surface/30 p-5 shadow-elevated backdrop-blur-xl"
         >
-          <GlassCard strong className="p-5 shadow-[var(--shadow-elevated)]">
-            <div className="flex items-center justify-between">
-              <div>
-                <span className="micro-label">Campaign ROAS</span>
-                <div className="mt-2 font-display text-3xl">4.7×</div>
+          <div className="flex gap-3 mb-4">
+             <div className="w-10 h-10 rounded-xl bg-white/5" />
+             <div className="flex-1 space-y-2">
+                <div className="h-2 w-full bg-white/10 rounded" />
+                <div className="h-2 w-2/3 bg-white/5 rounded" />
+             </div>
+          </div>
+          <div className="p-4 rounded-2xl bg-white/5 border border-white/5">
+             <div className="text-[10px] text-primary font-bold uppercase tracking-widest mb-1">Live Telemetry</div>
+             <div className="text-2xl font-display italic">98.4%</div>
+          </div>
+        </motion.div>
+
+        {/* Widget 3: Conversion Funnel */}
+        <motion.div
+          initial={{ opacity: 0, y: 150 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.8, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute left-[15%] top-[-5%] w-56 rounded-2xl border border-white/5 bg-surface/20 p-4 shadow-elevated backdrop-blur-lg hidden lg:block"
+        >
+           <div className="space-y-3">
+              <div className="h-1.5 w-1/2 bg-white/10 rounded" />
+              <div className="space-y-1.5">
+                 <div className="h-6 w-full bg-primary/10 rounded-lg border border-primary/10" />
+                 <div className="h-6 w-[80%] bg-white/5 rounded-lg" />
+                 <div className="h-6 w-[60%] bg-white/5 rounded-lg" />
               </div>
-              <Activity className="h-4 w-4 text-silver" />
             </div>
             <div className="mt-3 -mx-1">
               <MiniBars height={70} />
