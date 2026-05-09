@@ -1,3 +1,10 @@
+export type MockupScreen = {
+  title: string;
+  description: string;
+  /** Which mini-chart type to render inside the mock */
+  chart: "area" | "bars" | "donut" | "kpi-grid";
+};
+
 export type Project = {
   slug: string;
   index: string;
@@ -10,6 +17,14 @@ export type Project = {
   approach: string[];
   metrics: { label: string; value: string; sub?: string }[];
   highlights: string[];
+  /** Accent colour used for project-specific glow effects */
+  accentHsl: string;
+  /** Tech & tools used */
+  stack: string[];
+  /** Screens shown as cinematic mockups */
+  screens: MockupScreen[];
+  /** Pull-quote / testimonial */
+  testimonial?: { quote: string; author: string; role: string };
 };
 
 export const projects: Project[] = [
@@ -21,6 +36,7 @@ export const projects: Project[] = [
     category: "Yacht Industry · Web Platform",
     year: "2024",
     status: "live",
+    accentHsl: "210 80% 56%",
     problem:
       "Existing yacht platforms felt like rental catalogues. The brief: a cinematic showcase that drives qualified inquiries without compromising on speed or SEO.",
     approach: [
@@ -36,6 +52,17 @@ export const projects: Project[] = [
       { label: "Bounce rate", value: "−41%", sub: "vs prior site" },
     ],
     highlights: ["Premium UX", "Yacht galleries", "Lead generation", "SEO-focused architecture", "Mobile responsive"],
+    stack: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Cloudflare", "Figma"],
+    screens: [
+      { title: "Fleet Overview", description: "Cinematic grid with hero imagery, live availability, and pricing tiers.", chart: "area" },
+      { title: "Yacht Profile", description: "Full-bleed gallery, deck plans, crew bios, and itinerary builder.", chart: "kpi-grid" },
+      { title: "Inquiry Funnel", description: "Multi-step booking flow with date selection, guest configuration, and add-ons.", chart: "bars" },
+    ],
+    testimonial: {
+      quote: "The new platform completely changed how prospects perceive us. Inquiries tripled and the quality of leads is night and day.",
+      author: "Marina Director",
+      role: "Charter Company",
+    },
   },
   {
     slug: "ads-analytics-dashboard",
@@ -45,6 +72,7 @@ export const projects: Project[] = [
     category: "Analytics · Internal Tool",
     year: "2024",
     status: "live",
+    accentHsl: "165 70% 46%",
     problem:
       "Marketing operated across six tools to answer one question: what's working today? They needed a single live surface for spend, performance, and intent.",
     approach: [
@@ -60,6 +88,17 @@ export const projects: Project[] = [
       { label: "Decisions/week", value: "3.4×" },
     ],
     highlights: ["Campaign metrics", "KPI tiles", "Data visualization", "Live reporting", "Modern admin UI"],
+    stack: ["React", "TypeScript", "D3.js", "Google Ads API", "GA4 API", "Recharts"],
+    screens: [
+      { title: "Campaign Command", description: "Real-time spend tracker with campaign-level ROAS and conversion funnels.", chart: "bars" },
+      { title: "Audience Insights", description: "Segmented audience performance with demographic and intent overlays.", chart: "donut" },
+      { title: "Attribution View", description: "Multi-touch attribution model with path analysis and channel comparison.", chart: "area" },
+    ],
+    testimonial: {
+      quote: "We went from six tabs and a spreadsheet to one screen. The team makes faster, better decisions every single day.",
+      author: "Head of Growth",
+      role: "Marketing Team",
+    },
   },
   {
     slug: "seo-search-console-platform",
@@ -69,6 +108,7 @@ export const projects: Project[] = [
     category: "SEO Intelligence · SaaS",
     year: "2025",
     status: "live",
+    accentHsl: "280 65% 58%",
     problem:
       "Search Console exposes the data, not the story. Strategists needed an interface that surfaces opportunity clusters, technical health, and trend deltas at a glance.",
     approach: [
@@ -84,6 +124,17 @@ export const projects: Project[] = [
       { label: "Reports auto-generated", value: "920/mo" },
     ],
     highlights: ["Keyword tracking", "Traffic analytics", "Technical SEO insights", "Performance graphs"],
+    stack: ["React", "Python", "Search Console API", "PostgreSQL", "Recharts", "Figma"],
+    screens: [
+      { title: "Keyword Clusters", description: "Intent-classified keyword groups with movement deltas and opportunity scoring.", chart: "kpi-grid" },
+      { title: "Crawl Health", description: "Indexability dashboard with canonical issues, CWV scores, and error logs.", chart: "bars" },
+      { title: "Period Comparison", description: "Side-by-side metric comparison with sparklines and trend annotations.", chart: "area" },
+    ],
+    testimonial: {
+      quote: "Finally, a tool that tells the SEO story instead of just dumping numbers. Our clients actually understand what we're doing now.",
+      author: "SEO Director",
+      role: "Digital Agency",
+    },
   },
   {
     slug: "marketing-intelligence-hub",
@@ -93,6 +144,7 @@ export const projects: Project[] = [
     category: "Business Intelligence · In Development",
     year: "2026",
     status: "in-development",
+    accentHsl: "35 85% 55%",
     problem:
       "Modern marketing teams are drowning in dashboards. The hub consolidates Google Ads, GA4, Search Console, and CRM into one decision-grade product.",
     approach: [
@@ -108,5 +160,16 @@ export const projects: Project[] = [
       { label: "Time-to-insight", value: "−74%" },
     ],
     highlights: ["Multi-platform campaigns", "GA + GSC integration", "Reporting systems", "Real-time widgets", "BI"],
+    stack: ["React", "Node.js", "GraphQL", "BigQuery", "Recharts", "Figma"],
+    screens: [
+      { title: "Executive Overview", description: "North-star KPIs, channel health, and goal pacing in a single dense view.", chart: "kpi-grid" },
+      { title: "Channel Deep-Dive", description: "Drill-down from channel to campaign to creative with contextual benchmarks.", chart: "area" },
+      { title: "Insight Reports", description: "Narrative-first report builder with auto-generated commentary and charts.", chart: "bars" },
+    ],
+    testimonial: {
+      quote: "This is the product we've been trying to build internally for three years. It finally makes cross-channel data actionable.",
+      author: "VP of Marketing",
+      role: "Enterprise Client",
+    },
   },
 ];
