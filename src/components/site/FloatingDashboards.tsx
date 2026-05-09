@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { GlassCard } from "./GlassCard";
+import { MiniBars } from "./MiniChart";
 
 export function FloatingDashboards() {
   return (
@@ -73,30 +75,29 @@ export function FloatingDashboards() {
             <div className="mt-3 flex items-center justify-between text-[11px] text-muted-foreground">
               <span>Mon</span><span>Wed</span><span>Fri</span><span>Sun</span>
             </div>
-          </GlassCard>
         </motion.div>
-      </motion.div>
 
-      {/* Tiny ring stat right-bottom */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.9, duration: 0.8 }}
-        className="absolute right-[12%] bottom-[14%] w-[180px]"
-      >
+        {/* Tiny ring stat right-bottom */}
         <motion.div
-          animate={{ y: [0, -8, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
+          className="absolute right-[12%] bottom-[14%] w-[180px]"
         >
-          <GlassCard strong className="p-4">
-            <span className="micro-label">Sessions</span>
-            <div className="mt-2 font-display text-2xl text-gradient-primary">128.4k</div>
-            <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
-              <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-primary to-primary-glow" />
-            </div>
-          </GlassCard>
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          >
+            <GlassCard strong className="p-4">
+              <span className="micro-label">Sessions</span>
+              <div className="mt-2 font-display text-2xl text-gradient-primary">128.4k</div>
+              <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-white/5">
+                <div className="h-full w-[78%] rounded-full bg-gradient-to-r from-primary to-primary-glow" />
+              </div>
+            </GlassCard>
+          </motion.div>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }
