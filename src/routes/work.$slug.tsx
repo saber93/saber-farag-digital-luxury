@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { projects } from "../lib/projects";
+import { projects, type Project } from "../lib/projects";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { useRef } from "react";
 import { 
@@ -154,7 +154,7 @@ function ProjectDetail() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {project.metrics.map((metric, i) => (
+            {project.metrics.map((metric: any, i: number) => (
               <motion.div
                 key={metric.label}
                 initial={{ opacity: 0, y: 20 }}
@@ -177,7 +177,7 @@ function ProjectDetail() {
                 <div className="text-[10px] text-muted-foreground mb-6 uppercase tracking-wider">{metric.sub}</div>
                 {metric.data && (
                   <div className="h-12 flex items-end gap-1">
-                    {metric.data.map((v, idx) => (
+                    {metric.data.map((v: number, idx: number) => (
                       <div 
                         key={idx} 
                         className="flex-1 bg-primary/20 group-hover:bg-primary/40 transition-all rounded-t-sm"
@@ -193,7 +193,7 @@ function ProjectDetail() {
 
         {/* Cinematic Mockups */}
         <section className="space-y-32">
-          {project.screens.map((screen, i) => (
+          {project.screens.map((screen: any, i: number) => (
             <div key={screen.title} className={`flex flex-col ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 items-center`}>
               <div className="flex-1 w-full">
                 {screen.chart === 'kpi-grid' ? (
@@ -257,7 +257,7 @@ function ProjectDetail() {
         <section className="space-y-16">
           <h2 className="text-4xl md:text-5xl font-display italic text-center">Decision-Making Through Design</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {project.designDecisions?.map((decision, i) => (
+            {project.designDecisions?.map((decision: any, i: number) => (
               <div key={decision.title} className="space-y-6 p-10 rounded-[2rem] bg-surface-elevated border border-white/5">
                 <div className="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center text-primary mb-8">
                   <CheckCircle2 className="w-6 h-6" />
@@ -284,7 +284,7 @@ function ProjectDetail() {
               performance, and developer-to-design synergy.
             </p>
             <div className="flex flex-wrap gap-2">
-              {project.stack.map(tech => (
+              {project.stack.map((tech: string) => (
                 <span key={tech} className="px-3 py-1 rounded-full bg-white/5 text-[10px] uppercase tracking-widest font-bold">
                   {tech}
                 </span>

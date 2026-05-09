@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { motion, type HTMLMotionProps, useMotionValue, useSpring, useTransform } from "framer-motion";
 
-type Props = HTMLMotionProps<"div"> & { strong?: boolean };
+type Props = HTMLMotionProps<"div"> & { strong?: boolean; children?: React.ReactNode };
 
 export function GlassCard({ className, strong, children, ...rest }: Props) {
   const mouseX = useMotionValue(0);

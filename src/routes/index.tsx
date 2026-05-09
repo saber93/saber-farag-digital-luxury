@@ -8,6 +8,7 @@ import { FloatingDashboards } from "@/components/site/FloatingDashboards";
 import { Reveal } from "@/components/site/Reveal";
 import { AnimatedCounter } from "@/components/site/AnimatedCounter";
 import { MiniArea } from "@/components/site/MiniChart";
+import { MagneticButton } from "@/components/site/MagneticButton";
 import { projects } from "@/lib/projects";
 
 export const Route = createFileRoute("/")({
