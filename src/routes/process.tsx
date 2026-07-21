@@ -1,65 +1,103 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SectionLabel } from "@/components/site/SectionLabel";
 import { GlassCard } from "@/components/site/GlassCard";
-import { Reveal } from "@/components/site/Reveal";
+import { SectionLabel } from "@/components/site/SectionLabel";
+import { breadcrumbSchema, pageHead } from "@/lib/seo";
+import { pages, routeHeaders } from "@/lib/site";
 
 export const Route = createFileRoute("/process")({
-  head: () => ({
-    meta: [
-      { title: "Process — Saber Farag" },
-      { name: "description", content: "An eight-step workflow from research to optimization, designed for premium digital products and analytics platforms." },
-      { property: "og:title", content: "Process — Saber Farag" },
-      { property: "og:description", content: "From research to live optimization — how premium platforms come together." },
-    ],
-  }),
+  head: () =>
+    pageHead(pages.process, {
+      schemas: [
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Process", path: "/process" },
+        ]),
+      ],
+    }),
+  headers: () => routeHeaders(true),
   component: ProcessPage,
 });
 
 const steps = [
-  { title: "Research", body: "Stakeholder interviews, competitive deep-dives, generative user research." },
-  { title: "UX Strategy", body: "Define the north-star metric, user jobs, and product principles." },
-  { title: "Wireframing", body: "Low-fidelity flows that pressure-test the architecture before pixels." },
-  { title: "Dashboard Architecture", body: "Information hierarchy and widget systems for decision-grade UX." },
-  { title: "Data Structuring", body: "Define entities, sources, refresh logic, and the schema design surfaces." },
-  { title: "UI Design", body: "Editorial typography, glass surfaces, motion, and component systems." },
-  { title: "Developer Collaboration", body: "Tight design-engineering partnership with token-driven systems." },
-  { title: "Optimization & Analytics", body: "Post-launch instrumentation, experimentation, and continuous tuning." },
-];
+  {
+    number: "01",
+    title: "Frame the decision",
+    body: "Define who needs an answer, what action follows, and which constraints matter.",
+  },
+  {
+    number: "02",
+    title: "Audit the evidence",
+    body: "Review sources, definitions, coverage, freshness, and known gaps before interpretation.",
+  },
+  {
+    number: "03",
+    title: "Map the questions",
+    body: "Organize primary outcomes, diagnostic questions, and the paths between overview and detail.",
+  },
+  {
+    number: "04",
+    title: "Design the hierarchy",
+    body: "Choose comparisons and visual forms that match the analytical task.",
+  },
+  {
+    number: "05",
+    title: "Prototype the workflow",
+    body: "Connect filters, annotations, states, and drill-down behavior in a testable interface.",
+  },
+  {
+    number: "06",
+    title: "Validate understanding",
+    body: "Check whether readers interpret the same definitions, changes, and caveats.",
+  },
+  {
+    number: "07",
+    title: "Document the system",
+    body: "Record metric meaning, ownership, refresh expectations, and interface conventions.",
+  },
+  {
+    number: "08",
+    title: "Review and refine",
+    body: "Revisit the questions as data, decisions, and user needs change.",
+  },
+] as const;
 
 function ProcessPage() {
   return (
     <>
-      <section className="relative isolate overflow-hidden pb-16 pt-36 sm:pt-44">
-        <div className="pointer-events-none absolute inset-0 -z-10" style={{ background: "var(--gradient-hero)" }} />
-        <div className="mx-auto max-w-7xl px-6">
+      <section className="relative overflow-hidden pb-20 pt-36 sm:pt-44">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ background: "var(--gradient-hero)" }}
+        />
+        <div className="relative mx-auto max-w-7xl px-6">
           <SectionLabel>Process</SectionLabel>
-          <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.4rem,6vw,4.8rem)] leading-[1.05]">
-            Eight steps from <span className="italic text-gradient">insight</span> to <span className="italic text-gradient">live optimization</span>.
+          <h1 className="mt-7 max-w-5xl font-display text-[clamp(3rem,7vw,6rem)] leading-[0.96]">
+            From a decision question to a reporting system that can be{" "}
+            <span className="italic text-gradient">understood.</span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            A repeatable, opinionated workflow built for products where craft, data, and outcomes all need to win.
+          <p className="mt-8 max-w-3xl text-lg leading-relaxed text-muted-foreground sm:text-xl">
+            The process keeps definitions and evidence close to the interface, so visual polish
+            never outruns analytical clarity.
           </p>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="relative ml-3 border-l border-white/10 pl-8 sm:ml-6 sm:pl-14">
-          {steps.map((s, i) => (
-            <Reveal key={s.title} delay={i * 0.04}>
-              <div className="relative pb-10 last:pb-0">
-                <span className="absolute -left-[44px] top-0 sm:-left-[60px]">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-background font-display text-sm text-silver shadow-[0_0_30px_oklch(0.72_0.18_240/0.25)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+      <section className="mx-auto max-w-7xl px-6 py-20" aria-label="Analytics design process">
+        <ol className="grid gap-4 md:grid-cols-2">
+          {steps.map((step) => (
+            <li key={step.number}>
+              <GlassCard className="grid h-full gap-5 p-7 sm:grid-cols-[auto_1fr]">
+                <span className="font-display text-3xl text-primary-glow" aria-hidden="true">
+                  {step.number}
                 </span>
-                <GlassCard className="p-7">
-                  <h3 className="font-display text-2xl sm:text-3xl">{s.title}</h3>
-                  <p className="mt-3 max-w-2xl text-muted-foreground">{s.body}</p>
-                </GlassCard>
-              </div>
-            </Reveal>
+                <div>
+                  <h2 className="font-display text-2xl">{step.title}</h2>
+                  <p className="mt-3 leading-relaxed text-muted-foreground">{step.body}</p>
+                </div>
+              </GlassCard>
+            </li>
           ))}
-        </div>
+        </ol>
       </section>
     </>
   );

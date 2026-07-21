@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { motion, type HTMLMotionProps, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion, type HTMLMotionProps, useMotionValue, useTransform } from "framer-motion";
 
 type Props = HTMLMotionProps<"div"> & { strong?: boolean; children?: React.ReactNode };
 
@@ -15,7 +15,8 @@ export function GlassCard({ className, strong, children, ...rest }: Props) {
 
   const background = useTransform(
     [mouseX, mouseY],
-    ([x, y]) => `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.06), transparent 80%)`
+    ([x, y]) =>
+      `radial-gradient(400px circle at ${x}px ${y}px, rgba(255,255,255,0.06), transparent 80%)`,
   );
 
   return (
@@ -28,8 +29,8 @@ export function GlassCard({ className, strong, children, ...rest }: Props) {
       )}
       {...rest}
     >
-      <motion.div 
-        className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+      <motion.div
+        className="pointer-events-none absolute -inset-px z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
         style={{ background }}
       />
       {children}

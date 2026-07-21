@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { site } from "@/lib/site";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -33,17 +34,19 @@ export function SiteHeader() {
         <div
           className={cn(
             "flex items-center justify-between rounded-full px-5 py-2.5 transition-all duration-500",
-            scrolled
-              ? "glass-strong shadow-[var(--shadow-card)]"
-              : "border border-transparent",
+            scrolled ? "glass-strong shadow-[var(--shadow-card)]" : "border border-transparent",
           )}
         >
-          <Link to="/" className="group flex items-center gap-2.5">
+          <Link
+            to="/"
+            aria-label={`${site.name}, home`}
+            className="group flex items-center gap-2.5 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-glow"
+          >
             <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-primary-glow to-primary shadow-[var(--shadow-glow)]">
               <span className="font-display text-sm text-primary-foreground">S</span>
             </span>
             <span className="font-display text-lg tracking-tight">
-              Saber <span className="italic text-silver">Farag</span>
+              Saber <span className="italic text-silver">El Shafey</span>
             </span>
           </Link>
 
@@ -52,7 +55,7 @@ export function SiteHeader() {
               <Link
                 key={n.to}
                 to={n.to}
-                className="rounded-full px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                className="rounded-full px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-glow"
                 activeProps={{ className: "text-foreground bg-white/5" }}
                 activeOptions={{ exact: n.to === "/" }}
               >
@@ -63,14 +66,16 @@ export function SiteHeader() {
 
           <Link
             to="/contact"
-            className="hidden rounded-full border border-white/15 bg-white/[0.04] px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-foreground backdrop-blur-md transition-all hover:border-primary-glow/50 hover:bg-white/[0.08] md:inline-flex"
+            className="hidden min-h-11 items-center rounded-full border border-white/15 bg-white/[0.04] px-5 py-2 text-xs uppercase tracking-[0.18em] text-foreground backdrop-blur-md transition-all hover:border-primary-glow/50 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-glow md:inline-flex"
           >
             Let's talk
           </Link>
 
           <button
             type="button"
-            aria-label="Menu"
+            aria-label={open ? "Close navigation" : "Open navigation"}
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
             onClick={() => setOpen((v) => !v)}
             className="md:hidden rounded-full border border-white/10 p-2"
           >
@@ -79,7 +84,7 @@ export function SiteHeader() {
         </div>
 
         {open && (
-          <div className="mt-2 rounded-2xl glass-strong p-4 md:hidden">
+          <div id="mobile-navigation" className="mt-2 rounded-2xl glass-strong p-4 md:hidden">
             <div className="flex flex-col">
               {nav.map((n) => (
                 <Link
