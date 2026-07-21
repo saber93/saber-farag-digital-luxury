@@ -168,6 +168,7 @@ export const securityHeaders = {
     "font-src 'self' data:",
     "form-action 'self'",
     "frame-ancestors 'none'",
+    isIndexableDeployment ? "frame-src 'none'" : "frame-src https://app.netlify.com",
     "img-src 'self' data:",
     "object-src 'none'",
     "script-src 'self' 'unsafe-inline'",
