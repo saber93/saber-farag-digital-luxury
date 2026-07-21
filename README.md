@@ -12,6 +12,7 @@ Use Node 22.23.1 and npm only. Install reproducibly with `npm ci` after the lock
 - `npm test` — registry/content unit tests
 - `npm run seo:check` — canonical, route, and claim contract checks
 - `npm run security:scan` — static secret/configuration scan
+- `npm run security:artifacts` — mandatory post-build client/server/function scan
 - `npm run build:production` — production-indexable Start build
 - `npm run test:e2e` — Playwright/axe SSR, SEO, 404, responsive, and accessibility checks
 - `npm run verify:full` — complete local release gate

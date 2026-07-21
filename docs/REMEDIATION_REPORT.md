@@ -26,7 +26,9 @@ Every inventoried route carries the shared typed fields for locale, ownership, i
 
 ## Delivery controls
 
-The branch pins Node 22.23.1 and npm 10.9.2, removes Bun and unused UI dependencies, disables source maps, fingerprints assets, emits route security/cache headers, and requires lint, type, unit, SEO, security, and output checks in the Netlify preview build. The runtime-only npm audit is a separate release gate.
+The branch pins Node 22.23.1, declares npm 10.9.2 as the project package manager, and accepts Netlify's supported npm 10.9 patch-level command runner. Netlify must run `npm ci`, prove the manifest and lockfile remain unchanged, and then pass lint, type, unit, SEO, source security, build, artifact security, and output checks. Bun and unused UI dependencies are removed, source maps are disabled, assets are fingerprinted, and route security/cache headers are explicit. The runtime-only npm audit is a separate release gate.
+
+The lock scan covers all 42 packages and 84 malicious versions in TanStack advisory `GHSA-g7cv-rxg3-hmpx`, rejects its dependency, filename, git-ref, and network indicators, validates registry/integrity provenance, and allows install scripts only for the reviewed root patch plus esbuild, fsevents, Playwright's fsevents copy, and sharp. Built client, server, and Netlify function output receives a mandatory second secret, local-path, preview-host, IOC, and source-map scan.
 
 The patched Babel runtime closes the current audit advisory. A narrow post-install script changes only three TanStack compiler default imports to namespace imports for Babel 8 ESM compatibility and fails if upstream file contents change. Playwright runs against the built Start/Netlify output rather than the development HMR server because the current TanStack HMR compiler still uses a Babel 7-only scope API. Remove both compatibility accommodations once TanStack publishes native Babel 8 interop.
 

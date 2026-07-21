@@ -3,12 +3,14 @@ import { spawnSync } from "node:child_process";
 const groups = {
   netlify: [
     "runtime:check",
+    "lock:check",
     "lint",
     "typecheck",
     "test:unit",
     "seo:check",
     "security:scan",
     "build",
+    "security:artifacts",
     "output:check",
   ],
   verify: [
@@ -20,6 +22,7 @@ const groups = {
     "seo:check",
     "security:scan",
     "build:production",
+    "security:artifacts",
     "output:check",
   ],
 };

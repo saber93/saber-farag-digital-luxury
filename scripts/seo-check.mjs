@@ -37,8 +37,8 @@ assert(
 assert(packageJson.engines.node === ">=22.12.0 <23", "Node 22 LTS must be enforced.");
 assert(packageJson.packageManager === "npm@10.9.2", "npm 10.9.2 must be enforced.");
 assert(
-  netlify.includes('command = "npm run build:netlify"'),
-  "Netlify must run verification before building.",
+  netlify.includes('command = "npm ci && npm run build:netlify"'),
+  "Netlify must run a deterministic install and verification before building.",
 );
 assert(
   netlify.includes('VITE_DEPLOY_CONTEXT = "deploy-preview"'),
