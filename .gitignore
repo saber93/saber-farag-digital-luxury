@@ -10,15 +10,15 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.netlify
 .output
 .vinxi
 .tanstack/**
 .nitro
 *.local
-
-# Wrangler / Cloudflare
-.wrangler/
-.dev.vars
+playwright-report
+test-results
+coverage
 
 # Editor directories and files
 .vscode/*

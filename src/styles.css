@@ -1,13 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss" source(none);
 @source "../src";
-@import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-display: Iowan Old Style, Baskerville, "Times New Roman", ui-serif, Georgia, serif;
+  --font-sans:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -50,7 +48,7 @@
 :root {
   --radius: 0.875rem;
 
-  /* Onyx & Deep Midnight - Pure Luxury */
+  /* Deep midnight analytics palette */
   --background: oklch(0.08 0.01 260);
   --foreground: oklch(0.98 0.005 250);
 
@@ -62,21 +60,21 @@
   --popover: oklch(0.14 0.02 260);
   --popover-foreground: oklch(0.98 0.005 250);
 
-  --primary: oklch(0.55 0.12 245);
+  --primary: oklch(0.62 0.12 245);
   --primary-foreground: oklch(0.08 0.01 260);
   --primary-glow: oklch(0.65 0.15 240);
 
   --secondary: oklch(0.18 0.02 258);
   --secondary-foreground: oklch(0.95 0.01 250);
   --muted: oklch(0.16 0.015 258);
-  --muted-foreground: oklch(0.60 0.02 250);
+  --muted-foreground: oklch(0.6 0.02 250);
   --accent: oklch(0.85 0.04 245);
   --accent-foreground: oklch(0.08 0.01 260);
 
   --silver: oklch(0.75 0.03 245);
   --platinum: oklch(0.95 0.01 250);
 
-  --destructive: oklch(0.55 0.20 25);
+  --destructive: oklch(0.55 0.2 25);
   --destructive-foreground: oklch(0.98 0.005 250);
 
   --border: oklch(1 0 0 / 0.06);
@@ -85,13 +83,14 @@
 
   --chart-1: oklch(0.65 0.15 240);
   --chart-2: oklch(0.75 0.03 245);
-  --chart-3: oklch(0.50 0.10 235);
-  --chart-4: oklch(0.80 0.08 220);
-  --chart-5: oklch(0.40 0.08 250);
+  --chart-3: oklch(0.5 0.1 235);
+  --chart-4: oklch(0.8 0.08 220);
+  --chart-5: oklch(0.4 0.08 250);
 
-  /* Gradients & shadows - More subtle, more expensive */
-  --gradient-hero: radial-gradient(ellipse 70% 50% at 50% 0%, oklch(0.25 0.08 245 / 0.4), transparent 75%),
-                   linear-gradient(180deg, oklch(0.08 0.01 260) 0%, oklch(0.06 0.01 260) 100%);
+  /* Gradients and shadows */
+  --gradient-hero:
+    radial-gradient(ellipse 70% 50% at 50% 0%, oklch(0.25 0.08 245 / 0.4), transparent 75%),
+    linear-gradient(180deg, oklch(0.08 0.01 260) 0%, oklch(0.06 0.01 260) 100%);
   --gradient-glass: linear-gradient(135deg, oklch(1 0 0 / 0.04), oklch(1 0 0 / 0.01));
   --gradient-text: linear-gradient(135deg, oklch(0.98 0.005 250), oklch(0.75 0.05 245));
   --gradient-primary: linear-gradient(135deg, var(--primary-glow), var(--primary));
@@ -119,6 +118,11 @@
     scroll-behavior: smooth;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--primary-glow);
+    outline-offset: 3px;
+  }
+
   body {
     background: var(--background);
     color: var(--foreground);
@@ -131,6 +135,21 @@
   ::selection {
     background: oklch(0.62 0.18 240 / 0.35);
     color: var(--foreground);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -158,10 +177,10 @@
     border: 1px solid oklch(1 0 0 / 0.08);
   }
   .glass-strong {
-    background: linear-gradient(135deg, oklch(1 0 0 / 0.10), oklch(1 0 0 / 0.04));
+    background: linear-gradient(135deg, oklch(1 0 0 / 0.1), oklch(1 0 0 / 0.04));
     backdrop-filter: blur(28px) saturate(150%);
     -webkit-backdrop-filter: blur(28px) saturate(150%);
-    border: 1px solid oklch(1 0 0 / 0.10);
+    border: 1px solid oklch(1 0 0 / 0.1);
   }
   .glow-primary {
     box-shadow: var(--shadow-glow);
